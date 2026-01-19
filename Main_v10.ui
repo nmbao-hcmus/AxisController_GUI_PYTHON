@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1150</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>STM32 G-Code Controller (Compact)</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* --- GLOBAL THEME --- */
+QMainWindow, QWidget {
+	background-color: #1e1e1e;
+	color: #e0e0e0;
+	font-family: &quot;Segoe UI&quot;, sans-serif;
+	font-size: 10pt;
+}
+
+/* --- SCROLL AREA --- */
+QScrollArea {
+	border: none;
+	background-color: #1e1e1e;
+}
+QScrollBar:vertical {
+	border: none;
+	background: #2d2d2d;
+	width: 14px;
+	margin: 0px;
+}
+QScrollBar::handle:vertical {
+	background: #555;
+	min-height: 20px;
+	border-radius: 7px;
+}
+QScrollBar::handle:vertical:hover {
+	background: #3498db;
+}
+
+/* --- GROUP BOX --- */
+QGroupBox {
+	background-color: #262626;
+	border: 1px solid #444;
+	border-radius: 6px;
+	margin-top: 20px; /* Giảm margin để tiết kiệm chỗ */
+	font-weight: bold;
+}
+QGroupBox::title {
+	subcontrol-origin: margin;
+	subcontrol-position: top left;
+	left: 12px;
+	padding: 0 5px;
+	color: #3498db;
+	background-color: #1e1e1e;
+}
+
+/* --- BUTTONS --- */
+QPushButton {
+	background-color: #333333;
+	border: 1px solid #555;
+	border-radius: 4px;
+	padding: 5px 10px; /* Giảm padding */
+	color: #ffffff;
+    min-height: 22px;
+}
+QPushButton:hover {
+	background-color: #444444;
+	border-color: #3498db;
+}
+QPushButton:pressed {
+	background-color: #222;
+}
+/* Nút STOP màu đỏ */
+QPushButton#Stopbtn, QPushButton#StopKimbtn {
+	background-color: #962a2a;
+	border: 1px solid #c0392b;
+	font-weight: bold;
+}
+QPushButton#Stopbtn:hover, QPushButton#StopKimbtn:hover {
+	background-color: #c0392b;
+}
+
+/* --- INPUTS --- */
+QLineEdit, QTextEdit {
+	background-color: #121212;
+	border: 1px solid #444;
+	border-radius: 4px;
+	color: #ecf0f1;
+	padding: 4px;
+}
+QLineEdit:focus {
+	border: 1px solid #3498db;
+}
+
+/* --- COMBOBOX --- */
+QComboBox {
+	background-color: #121212;
+	border: 1px solid #444;
+	border-radius: 4px;
+	padding: 4px;
+	color: #ecf0f1;
+    min-width: 60px;
+}
+QComboBox::drop-down { border: 0px; }
+QComboBox QAbstractItemView {
+	background-color: #2d2d2d;
+	color: #ffffff;
+	selection-background-color: #3498db;
+	selection-color: #ffffff;
+	border: 1px solid #444;
+	outline: none;
+}
+
+/* --- LABELS --- */
+QLabel { color: #cccccc; }
+QLabel[frameShape=&quot;1&quot;] { /* Box style for DRO */
+	background-color: #000000;
+	border: 1px solid #555;
+	border-radius: 4px;
+	font-weight: bold;
+	padding-right: 5px;
+}
+
+/* --- FIX MESSAGE BOX (SỬA LỖI CHỮ TRÙNG MÀU) --- */
+QMessageBox {
+	background-color: #2d2d2d; /* Nền tối */
+    border: 1px solid #555;
+}
+QMessageBox QLabel {
+	color: #ffffff; /* Chữ trắng tuyệt đối */
+    background-color: transparent;
+}
+QMessageBox QPushButton {
+    background-color: #444;
+    color: white;
+    border: 1px solid #666;
+    min-width: 60px;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_root">
+    <property name="leftMargin"><number>0</number></property>
+    <property name="topMargin"><number>0</number></property>
+    <property name="rightMargin"><number>0</number></property>
+    <property name="bottomMargin"><number>0</number></property>
+    
+    <item>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>1148</width>
+         <height>698</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_main">
+        
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_control">
+          
+          <item>
+           <widget class="QGroupBox" name="groupBox_jog">
+            <property name="title">
+             <string>BÀN MÁY (TABLE)</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_jog_internal">
+             <property name="spacing"><number>6</number></property>
+             
+             <item>
+                <widget class="QGroupBox" name="groupBox_connection">
+                 <property name="title">
+                  <string>Kết Nối</string>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_com">
+                  <property name="leftMargin"><number>6</number></property>
+                  <property name="topMargin"><number>6</number></property>
+                  <property name="rightMargin"><number>6</number></property>
+                  <property name="bottomMargin"><number>6</number></property>
+                  <item>
+                   <widget class="QComboBox" name="portComboBox"/>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="refreshButton">
+                    <property name="text"><string>↻</string></property>
+                    <property name="maximumSize"><size><width>30</width><height>16777215</height></size></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="connectButton">
+                    <property name="text"><string>Connect</string></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="statusLabel">
+                    <property name="text"><string>Disconnected</string></property>
+                    <property name="styleSheet"><string>color: #e74c3c; font-weight: bold;</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+             </item>
+
+             <item>
+              <layout class="QGridLayout" name="gridLayout_dro">
+               <property name="verticalSpacing"><number>4</number></property>
+               <item row="0" column="0"><widget class="QLabel" name="label_x_title"><property name="text"><string>X:</string></property></widget></item>
+               <item row="0" column="1"><widget class="QLabel" name="xPosLabel"><property name="text"><string>0.000</string></property><property name="styleSheet"><string>color: #3498db; font-size: 13pt;</string></property><property name="alignment"><set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set></property><property name="frameShape"><enum>QFrame::Box</enum></property></widget></item>
+               <item row="0" column="2"><widget class="QPushButton" name="SetX0Button"><property name="text"><string>Zero X</string></property></widget></item>
+               <item row="1" column="0"><widget class="QLabel" name="label_y_title"><property name="text"><string>Y:</string></property></widget></item>
+               <item row="1" column="1"><widget class="QLabel" name="yPosLabel"><property name="text"><string>0.000</string></property><property name="styleSheet"><string>color: #2ecc71; font-size: 13pt;</string></property><property name="alignment"><set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set></property><property name="frameShape"><enum>QFrame::Box</enum></property></widget></item>
+               <item row="1" column="2"><widget class="QPushButton" name="SetY0Button"><property name="text"><string>Zero Y</string></property></widget></item>
+               <item row="2" column="0"><widget class="QLabel" name="label_z_title"><property name="text"><string>Z:</string></property></widget></item>
+               <item row="2" column="1"><widget class="QLabel" name="zPosLabel"><property name="text"><string>0.000</string></property><property name="styleSheet"><string>color: #e74c3c; font-size: 13pt;</string></property><property name="alignment"><set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set></property><property name="frameShape"><enum>QFrame::Box</enum></property></widget></item>
+               <item row="2" column="2"><widget class="QPushButton" name="SetZ0Button"><property name="text"><string>Zero Z</string></property></widget></item>
+              </layout>
+             </item>
+
+             <item>
+               <layout class="QGridLayout" name="grid_jog_table_btns">
+                 <property name="verticalSpacing"><number>4</number></property>
+                 <item row="0" column="1"><widget class="QPushButton" name="jogYPlusButton"><property name="text"><string>Y+ (Tiến)</string></property></widget></item>
+                 <item row="1" column="0"><widget class="QPushButton" name="jogXMinusButton"><property name="text"><string>X- (Trái)</string></property></widget></item>
+                 <item row="1" column="1"><widget class="QPushButton" name="Stopbtn"><property name="text"><string>STOP</string></property><property name="minimumHeight"><number>35</number></property></widget></item>
+                 <item row="1" column="2"><widget class="QPushButton" name="jogXPlusButton"><property name="text"><string>X+ (Phải)</string></property></widget></item>
+                 <item row="2" column="1"><widget class="QPushButton" name="jogYMinusButton"><property name="text"><string>Y- (Lùi)</string></property></widget></item>
+                 <item row="0" column="2"><widget class="QPushButton" name="jogZPlusButton"><property name="text"><string>Z+ (Lên)</string></property></widget></item>
+                 <item row="2" column="2"><widget class="QPushButton" name="jogZMinusButton"><property name="text"><string>Z- (Xuống)</string></property></widget></item>
+               </layout>
+             </item>
+
+             <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_speed">
+                     <item><widget class="QLabel" name="lbl_speed"><property name="text"><string>F:</string></property></widget></item>
+                     <item><widget class="QLineEdit" name="txt_input_send_F"><property name="text"><string>1000</string></property><property name="maximumSize"><size><width>60</width><height>16777215</height></size></property></widget></item>
+                     <item><widget class="QLabel" name="lbl_dist"><property name="text"><string>Dist:</string></property></widget></item>
+                     <item><widget class="QLineEdit" name="txt_input_intervalDistance"><property name="text"><string>1</string></property><property name="maximumSize"><size><width>40</width><height>16777215</height></size></property></widget></item>
+                     <item><widget class="QPushButton" name="slowButton"><property name="text"><string>Slow</string></property></widget></item>
+                     <item><widget class="QPushButton" name="fastButton"><property name="text"><string>Fast</string></property></widget></item>
+                 </layout>
+             </item>
+             <item>
+                <widget class="QGroupBox" name="grp_manual_table">
+                    <property name="title"><string>Manual Goto</string></property>
+                    <layout class="QHBoxLayout" name="lay_manual_table">
+                        <property name="spacing"><number>2</number></property>
+                        <property name="leftMargin"><number>2</number></property>
+                        <property name="topMargin"><number>4</number></property>
+                        <property name="rightMargin"><number>2</number></property>
+                        <property name="bottomMargin"><number>4</number></property>
+                        <item><widget class="QLineEdit" name="txt_input_goto_X"><property name="placeholderText"><string>X</string></property></widget></item>
+                        <item><widget class="QLineEdit" name="txt_input_goto_Y"><property name="placeholderText"><string>Y</string></property></widget></item>
+                        <item><widget class="QLineEdit" name="txt_input_goto_Z"><property name="placeholderText"><string>Z</string></property></widget></item>
+                        <item><widget class="QLineEdit" name="txt_input_goto_F"><property name="placeholderText"><string>F</string></property><property name="maximumSize"><size><width>50</width><height>16777215</height></size></property></widget></item>
+                        <item><widget class="QPushButton" name="CurrentPosButton"><property name="text"><string>Get</string></property><property name="maximumSize"><size><width>40</width><height>16777215</height></size></property></widget></item>
+                        <item><widget class="QPushButton" name="btn_manual_goto"><property name="text"><string>GO</string></property></widget></item>
+                    </layout>
+                </widget>
+             </item>
+             <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_presets">
+                     <item><widget class="QPushButton" name="gotoAButton"><property name="text"><string>A</string></property></widget></item>
+                     <item><widget class="QPushButton" name="gotoBButton"><property name="text"><string>B</string></property></widget></item>
+                     <item><widget class="QPushButton" name="gotoCButton"><property name="text"><string>C</string></property></widget></item>
+                     <item><widget class="QPushButton" name="gotoDButton"><property name="text"><string>D</string></property></widget></item>
+                 </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          
+          <item>
+              <widget class="QGroupBox" name="groupBox_jogKim">
+                <property name="title"><string>KIM (NEEDLE)</string></property>
+                <layout class="QVBoxLayout" name="layout_kim">
+                    <property name="spacing"><number>6</number></property>
+                    <item>
+                        <layout class="QHBoxLayout" name="layout_con_kim">
+                            <item><widget class="QComboBox" name="portComboBoxKim"/></item>
+                            <item><widget class="QPushButton" name="refreshButtonKim"><property name="text"><string>↻</string></property><property name="maximumSize"><size><width>30</width><height>16777215</height></size></property></widget></item>
+                            <item><widget class="QPushButton" name="connectButtonKim"><property name="text"><string>Connect</string></property></widget></item>
+                            <item><widget class="QLabel" name="statusKimLabel"><property name="text"><string>Disconnected</string></property><property name="styleSheet"><string>color: #e74c3c; font-weight: bold;</string></property></widget></item>
+                        </layout>
+                    </item>
+
+                    <item>
+                      <layout class="QGridLayout" name="gridLayout_droKim">
+                        <property name="verticalSpacing"><number>4</number></property>
+                        <item row="0" column="0"><widget class="QLabel" name="lxk"><property name="text"><string>X:</string></property></widget></item>
+                        <item row="0" column="1"><widget class="QLabel" name="xPosKimLabel"><property name="text"><string>0.000</string></property><property name="frameShape"><enum>QFrame::Box</enum></property><property name="styleSheet"><string>color:#3498db; font-size:11pt;</string></property></widget></item>
+                        <item row="0" column="2"><widget class="QPushButton" name="SetX0KimButton"><property name="text"><string>0</string></property><property name="maximumSize"><size><width>30</width><height>16777215</height></size></property></widget></item>
+                        
+                        <item row="1" column="0"><widget class="QLabel" name="lyk"><property name="text"><string>Y:</string></property></widget></item>
+                        <item row="1" column="1"><widget class="QLabel" name="yPosKimLabel"><property name="text"><string>0.000</string></property><property name="frameShape"><enum>QFrame::Box</enum></property><property name="styleSheet"><string>color:#2ecc71; font-size:11pt;</string></property></widget></item>
+                        <item row="1" column="2"><widget class="QPushButton" name="SetY0KimButton"><property name="text"><string>0</string></property><property name="maximumSize"><size><width>30</width><height>16777215</height></size></property></widget></item>
+                        
+                        <item row="2" column="0"><widget class="QLabel" name="lx1k"><property name="text"><string>X1:</string></property></widget></item>
+                        <item row="2" column="1"><widget class="QLabel" name="x1PosKimLabel"><property name="text"><string>0.000</string></property><property name="frameShape"><enum>QFrame::Box</enum></property><property name="styleSheet"><string>color:#e74c3c; font-size:11pt;</string></property></widget></item>
+                        <item row="2" column="2"><widget class="QPushButton" name="SetX1KimButton"><property name="text"><string>0</string></property><property name="maximumSize"><size><width>30</width><height>16777215</height></size></property></widget></item>
+                        
+                        <item row="3" column="0"><widget class="QLabel" name="ly1k"><property name="text"><string>Y1:</string></property></widget></item>
+                        <item row="3" column="1"><widget class="QLabel" name="y1PosKimLabel"><property name="text"><string>0.000</string></property><property name="frameShape"><enum>QFrame::Box</enum></property><property name="styleSheet"><string>color:#f1c40f; font-size:11pt;</string></property></widget></item>
+                        <item row="3" column="2"><widget class="QPushButton" name="SetY1KimButton"><property name="text"><string>0</string></property><property name="maximumSize"><size><width>30</width><height>16777215</height></size></property></widget></item>
+                        
+                        <item row="0" column="3" rowspan="4">
+                             <widget class="QPushButton" name="StopKimbtn">
+                                <property name="text"><string>STOP</string></property>
+                                <property name="sizePolicy"><sizepolicy hsizetype="Minimum" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+                             </widget>
+                        </item>
+                      </layout>
+                     </item>
+
+                     <item>
+                         <layout class="QGridLayout" name="grid_jog_kim">
+                             <property name="verticalSpacing"><number>4</number></property>
+                             <item row="0" column="0"><widget class="QPushButton" name="jogXMinusKimButton"><property name="text"><string>X-</string></property></widget></item>
+                             <item row="0" column="1"><widget class="QPushButton" name="jogXPlusKimButton"><property name="text"><string>X+</string></property></widget></item>
+                             <item row="0" column="2"><widget class="QPushButton" name="jogYMinusKimButton"><property name="text"><string>Y-</string></property></widget></item>
+                             <item row="0" column="3"><widget class="QPushButton" name="jogYPlusKimButton"><property name="text"><string>Y+</string></property></widget></item>
+                             
+                             <item row="1" column="0"><widget class="QPushButton" name="jogX1MinusKimButton"><property name="text"><string>X1-</string></property></widget></item>
+                             <item row="1" column="1"><widget class="QPushButton" name="jogX1PlusKimButton"><property name="text"><string>X1+</string></property></widget></item>
+                             <item row="1" column="2"><widget class="QPushButton" name="jogY1MinusKimButton"><property name="text"><string>Y1-</string></property></widget></item>
+                             <item row="1" column="3"><widget class="QPushButton" name="jogY1PlusKimButton"><property name="text"><string>Y1+</string></property></widget></item>
+                         </layout>
+                     </item>
+                     
+                     <item>
+                         <layout class="QHBoxLayout" name="layout_speed_kim">
+                             <item><widget class="QLabel" name="lbl_fk"><property name="text"><string>F:</string></property></widget></item>
+                             <item><widget class="QLineEdit" name="txt_input_send_FKim"><property name="text"><string>1000</string></property><property name="maximumSize"><size><width>60</width><height>16777215</height></size></property></widget></item>
+                             <item><widget class="QLabel" name="lbl_dk"><property name="text"><string>Dist:</string></property></widget></item>
+                             <item><widget class="QLineEdit" name="txt_input_intervalDistanceKim"><property name="text"><string>1</string></property><property name="maximumSize"><size><width>40</width><height>16777215</height></size></property></widget></item>
+                             <item><widget class="QPushButton" name="slowKimButton"><property name="text"><string>Slow</string></property></widget></item>
+                             <item><widget class="QPushButton" name="fastKimButton"><property name="text"><string>Fast</string></property></widget></item>
+                         </layout>
+                     </item>
+                     <item>
+                        <widget class="QGroupBox" name="grp_manual_kim">
+                            <property name="title"><string>Manual Goto Kim</string></property>
+                            <layout class="QHBoxLayout" name="lay_manual_kim">
+                                <property name="spacing"><number>2</number></property>
+                                <property name="leftMargin"><number>2</number></property>
+                                <property name="topMargin"><number>4</number></property>
+                                <property name="rightMargin"><number>2</number></property>
+                                <property name="bottomMargin"><number>4</number></property>
+                                <item><widget class="QLineEdit" name="txt_input_goto_XKim"><property name="placeholderText"><string>X</string></property></widget></item>
+                                <item><widget class="QLineEdit" name="txt_input_goto_YKim"><property name="placeholderText"><string>Y</string></property></widget></item>
+                                <item><widget class="QLineEdit" name="txt_input_goto_X1Kim"><property name="placeholderText"><string>X1</string></property></widget></item>
+                                <item><widget class="QLineEdit" name="txt_input_goto_Y1Kim"><property name="placeholderText"><string>Y1</string></property></widget></item>
+                                <item><widget class="QLineEdit" name="txt_input_goto_FKim"><property name="placeholderText"><string>F</string></property><property name="maximumSize"><size><width>50</width><height>16777215</height></size></property></widget></item>
+                                <item><widget class="QPushButton" name="CurrentPosKimButton"><property name="text"><string>Get</string></property><property name="maximumSize"><size><width>40</width><height>16777215</height></size></property></widget></item>
+                                <item><widget class="QPushButton" name="btn_manual_gotoKim"><property name="text"><string>GO</string></property></widget></item>
+                            </layout>
+                        </widget>
+                     </item>
+                </layout>
+              </widget>
+          </item>
+          
+          <item>
+            <spacer name="verticalSpacer">
+                <property name="orientation"><enum>Qt::Vertical</enum></property>
+                <property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property>
+            </spacer>
+          </item>
+         </layout>
+        </item>
+        
+        <item>
+            <layout class="QVBoxLayout" name="layout_right">
+                <item>
+                    <widget class="QLabel" name="Label_Camera">
+                        <property name="minimumSize"><size><width>480</width><height>360</height></size></property>
+                        <property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+                        <property name="frameShape"><enum>QFrame::Box</enum></property>
+                        <property name="styleSheet"><string>border: 2px solid #444; background-color: #000;</string></property>
+                        <property name="text"><string>NO SIGNAL</string></property>
+                        <property name="alignment"><set>Qt::AlignCenter</set></property>
+                    </widget>
+                </item>
+                <item>
+                    <widget class="QGroupBox" name="grp_console">
+                        <property name="title"><string>Console Log</string></property>
+                        <layout class="QVBoxLayout" name="lay_con">
+                            <item>
+                                <widget class="QTextEdit" name="logTextEdit">
+                                    <property name="readOnly"><bool>true</bool></property>
+                                    <property name="styleSheet"><string>font-family: Consolas, monospace; font-size: 9pt; color: #a0a0a0;</string></property>
+                                </widget>
+                            </item>
+                            <item>
+                                <layout class="QHBoxLayout" name="lay_cmd">
+                                    <item><widget class="QLineEdit" name="gcodeInput"><property name="placeholderText"><string>Enter G-Code...</string></property></widget></item>
+                                    <item><widget class="QPushButton" name="sendTableButton"><property name="text"><string>Send Table</string></property></widget></item>
+                                    <item><widget class="QPushButton" name="sendKimButton"><property name="text"><string>Send Kim</string></property></widget></item>
+                                </layout>
+                            </item>
+                        </layout>
+                    </widget>
+                </item>
+            </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry"><rect><x>0</x><y>0</y><width>1150</width><height>22</height></rect></property>
+   <widget class="QMenu" name="menuTool">
+    <property name="title"><string>Tools</string></property>
+    <addaction name="actionControl_Camera"/>
+    <addaction name="actionSet_Preset_Position"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuTool"/>
+  </widget>
+  <action name="actionControl_Camera"><property name="text"><string>Camera Controller</string></property></action>
+  <action name="actionSet_Preset_Position"><property name="text"><string>Set Presets</string></property></action>
+  <action name="actionAbout"><property name="text"><string>About</string></property></action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Pro Camera Controller</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QWidget { background-color: #1e1e1e; color: #e0e0e0; font-family: Segoe UI, Arial; font-size: 10pt; }
+    QGroupBox { border: 1px solid #3e3e3e; border-radius: 5px; margin-top: 20px; font-weight: bold; color: #3498db; }
+    QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 3px; }
+    QPushButton { background-color: #3e3e3e; border: 1px solid #555; border-radius: 4px; padding: 6px; min-height: 25px; }
+    QPushButton:hover { background-color: #4e4e4e; border-color: #777; }
+    QPushButton:pressed { background-color: #2c2c2c; }
+    QPushButton:checked { background-color: #d35400; color: white; border-color: #e67e22; }
+    QComboBox { background-color: #2d2d2d; border: 1px solid #555; border-radius: 4px; padding: 4px; }
+    QComboBox::drop-down { border: 0px; }
+   </string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_Main">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_View">
+     <item>
+      <widget class="QFrame" name="frame_View">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>640</width>
+         <height>480</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #000; border: 2px solid #444; border-radius: 4px;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_Controls">
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="btn_Pin">
+       <property name="text">
+        <string>📌 Ghim cửa sổ</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton:checked { background-color: #f1c40f; color: black; }</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_1">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="group_Connection">
+       <property name="title">
+        <string>KẾT NỐI</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_CamIdx">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Camera:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="combo_CameraIndex">
+            <item><property name="text"><string>0</string></property></item>
+            <item><property name="text"><string>1</string></property></item>
+            <item><property name="text"><string>2</string></property></item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_StartCamera">
+          <property name="text">
+           <string>Bật Camera</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+            QPushButton { background-color: #27ae60; color: white; font-weight: bold; }
+            QPushButton:hover { background-color: #2ecc71; }
+            QPushButton:checked { background-color: #c0392b; text: "Tắt Camera"; }
+           </string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="group_Control">
+       <property name="title">
+        <string>ĐIỀU KHIỂN</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="btn_GoTo">
+          <property name="text">
+           <string>🎯 Chọn điểm đi tới</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_Zoom">
+          <property name="text">
+           <string>🔍 Zoom: 1.0x</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_Settings">
+          <property name="text">
+           <string>⚙️ Cài đặt hình ảnh</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #2980b9; color: white;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Bản đồ thu nhỏ:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       <item>
+ <widget class="QLabel" name="label_Minimap">
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>150</height>
+   </size>
+  </property>
+  <property name="text">
+   <string>NO SIGNAL</string>
+  </property>
+  <property name="alignment">
+   <set>Qt::AlignCenter</set>
+  </property>
+ </widget>
+</item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_Bottom">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

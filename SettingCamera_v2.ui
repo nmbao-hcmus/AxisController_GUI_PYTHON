@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>420</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Cài đặt hình ảnh</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QDialog { background-color: #252525; color: #eee; font-family: Segoe UI; }
+    QGroupBox { border: 1px solid #555; border-radius: 6px; margin-top: 22px; color: #4aa3df; font-weight: bold; padding-top: 10px; }
+    QGroupBox::title { subcontrol-origin: margin; top: 0px; left: 10px; }
+    QLabel { color: #ccc; }
+    QSlider::groove:horizontal { border: 1px solid #333; height: 6px; background: #333; margin: 2px 0; border-radius: 3px; }
+    QSlider::handle:horizontal { background: #3498db; border: 1px solid #3498db; width: 14px; height: 14px; margin: -5px 0; border-radius: 7px; }
+    QPushButton { background-color: #444; color: white; border: none; padding: 8px; border-radius: 4px; }
+    QPushButton:hover { background-color: #555; }
+    QPushButton#btn_Reset { background-color: #c0392b; }
+    QPushButton#btn_SaveJson { background-color: #27ae60; }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Thông số cơ bản</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label"><property name="text"><string>Độ sáng:</string></property></widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSlider" name="slider_Brightness">
+        <property name="minimum"><number>-100</number></property>
+        <property name="maximum"><number>100</number></property>
+        <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2"><property name="text"><string>Tương phản:</string></property></widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSlider" name="slider_Contrast">
+        <property name="minimum"><number>10</number></property>
+        <property name="maximum"><number>300</number></property>
+        <property name="value"><number>100</number></property>
+        <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3"><property name="text"><string>Độ nét:</string></property></widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSlider" name="slider_Sharpness">
+        <property name="maximum"><number>10</number></property>
+        <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Nâng cao</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_Blur">
+        <item>
+         <widget class="QLabel" name="label_5"><property name="text"><string>Làm mờ (Blur):</string></property></widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="slider_Blur">
+          <property name="maximum"><number>20</number></property>
+          <property name="orientation"><enum>Qt::Horizontal</enum></property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chk_Grayscale">
+        <property name="text"><string>Chế độ ảnh xám (Grayscale)</string></property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chk_Edge">
+        <property name="text"><string>Lấy biên dạng (Edge Detection - Canny)</string></property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chk_Binary">
+        <property name="text"><string>Nhị phân hóa (Threshold)</string></property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_Thresh">
+        <item>
+         <widget class="QLabel" name="label_4"><property name="text"><string>Ngưỡng:</string></property></widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="slider_Threshold">
+          <property name="enabled"><bool>false</bool></property>
+          <property name="maximum"><number>255</number></property>
+          <property name="value"><number>127</number></property>
+          <property name="orientation"><enum>Qt::Horizontal</enum></property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_Buttons">
+     <item>
+      <widget class="QPushButton" name="btn_Reset">
+       <property name="text"><string>Mặc định (Reset)</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_LoadJson">
+       <property name="text"><string>Nạp JSON</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_SaveJson">
+       <property name="text"><string>Lưu JSON</string></property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

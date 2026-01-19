@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>380</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Set Preset Positions</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QDialog { background-color: #1e1e1e; color: #e0e0e0; font-family: Segoe UI; font-size: 10pt; }
+    
+    QGroupBox { border: 1px solid #444; border-radius: 6px; margin-top: 24px; font-weight: bold; background-color: #262626; }
+    QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #3498db; background-color: #1e1e1e; }
+    
+    /* INPUT CHO PHÉP NHẬP */
+    QLineEdit { background-color: #121212; border: 1px solid #444; border-radius: 3px; color: #fff; padding: 4px; }
+    QLineEdit:focus { border: 1px solid #3498db; }
+    
+    /* INPUT CHỈ ĐỌC (READONLY) */
+    QLineEdit[readOnly="true"] { background-color: #2d2d2d; color: #aaa; border: 1px solid #333; }
+    
+    QPushButton { background-color: #333; border: 1px solid #555; padding: 6px; color: white; border-radius: 4px; }
+    QPushButton:hover { background-color: #444; border-color: #3498db; }
+    
+    QComboBox { background-color: #121212; border: 1px solid #555; padding: 4px; color: white; border-radius: 3px; }
+    QComboBox QAbstractItemView { background-color: #2d2d2d; color: white; selection-background-color: #3498db; }
+    
+    QLabel { color: #ccc; }
+    QLabel#label_6, QLabel#label_7, QLabel#label_8 { color: #3498db; font-weight: bold; } /* Header X Y Z */
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Vị trí đã lưu (Current Presets)</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_6"><property name="text"><string>X</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_7"><property name="text"><string>Y</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_8"><property name="text"><string>Z</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget>
+      </item>
+      
+      <item row="1" column="0"><widget class="QLabel" name="label"><property name="text"><string>A:</string></property></widget></item>
+      <item row="1" column="1"><widget class="QLineEdit" name="line_A_X"><property name="readOnly"><bool>true</bool></property></widget></item>
+      <item row="1" column="2"><widget class="QLineEdit" name="line_A_Y"><property name="readOnly"><bool>true</bool></property></widget></item>
+      <item row="1" column="3"><widget class="QLineEdit" name="line_A_Z"><property name="readOnly"><bool>true</bool></property></widget></item>
+      
+      <item row="2" column="0"><widget class="QLabel" name="label_2"><property name="text"><string>B:</string></property></widget></item>
+      <item row="2" column="1"><widget class="QLineEdit" name="line_B_X"><property name="readOnly"><bool>true</bool></property></widget></item>
+      <item row="2" column="2"><widget class="QLineEdit" name="line_B_Y"><property name="readOnly"><bool>true</bool></property></widget></item>
+      <item row="2" column="3"><widget class="QLineEdit" name="line_B_Z"><property name="readOnly"><bool>true</bool></property></widget></item>
+      
+      <item row="3" column="0"><widget class="QLabel" name="label_3"><property name="text"><string>C:</string></property></widget></item>
+      <item row="3" column="1"><widget class="QLineEdit" name="line_C_X"><property name="readOnly"><bool>true</bool></property></widget></item>
+      <item row="3" column="2"><widget class="QLineEdit" name="line_C_Y"><property name="readOnly"><bool>true</bool></property></widget></item>
+      <item row="3" column="3"><widget class="QLineEdit" name="line_C_Z"><property name="readOnly"><bool>true</bool></property></widget></item>
+      
+      <item row="4" column="0"><widget class="QLabel" name="label_4"><property name="text"><string>D:</string></property></widget></item>
+      <item row="4" column="1"><widget class="QLineEdit" name="line_D_X"><property name="readOnly"><bool>true</bool></property></widget></item>
+      <item row="4" column="2"><widget class="QLineEdit" name="line_D_Y"><property name="readOnly"><bool>true</bool></property></widget></item>
+      <item row="4" column="3"><widget class="QLineEdit" name="line_D_Z"><property name="readOnly"><bool>true</bool></property></widget></item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Cài đặt mới (New Setting)</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5"><property name="text"><string>Input:</string></property></widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="input_Set_X"><property name="placeholderText"><string>X</string></property></widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="input_Set_Y"><property name="placeholderText"><string>Y</string></property></widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="input_Set_Z"><property name="placeholderText"><string>Z</string></property></widget>
+      </item>
+      <item row="1" column="0" colspan="4">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="btn_GetInfo">
+          <property name="text"><string>Get All</string></property>
+          <property name="styleSheet"><string>background-color: #2980b9; border-color: #2980b9;</string></property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation"><enum>Qt::Horizontal</enum></property>
+          <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QComboBox" name="combo_Target">
+          <item><property name="text"><string>A</string></property></item>
+          <item><property name="text"><string>B</string></property></item>
+          <item><property name="text"><string>C</string></property></item>
+          <item><property name="text"><string>D</string></property></item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_SetPosition">
+          <property name="text"><string>Set Position</string></property>
+          <property name="styleSheet"><string>background-color: #27ae60; border-color: #27ae60;</string></property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

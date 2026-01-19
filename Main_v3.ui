@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>STM32 G-Code Controller</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_main">
+    
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_control">
+      
+      <item>
+       <widget class="QGroupBox" name="groupBox_connection">
+        <property name="title">
+         <string>KẾT NỐI COM</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_com">
+         <item>
+          <widget class="QComboBox" name="portComboBox"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="refreshButton">
+           <property name="text">
+            <string>Refresh</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="connectButton">
+           <property name="text">
+            <string>Connect</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      
+      <item>
+    <widget class="QGroupBox" name="groupBox_dro">
+        <property name="title">
+            <string>DRO &amp; TRẠNG THÁI</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_dro">
+            <item row="0" column="0">
+                <widget class="QLabel" name="label_status_title">
+                    <property name="text">
+                        <string>Trạng thái Kết nối:</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="0" column="1">
+                <widget class="QLabel" name="statusLabel">
+                    <property name="font">
+                        <font>
+                            <pointsize>12</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                        </font>
+                    </property>
+                    <property name="styleSheet">
+                        <string>color: #e74c3c;</string>
+                    </property>
+                    <property name="text">
+                        <string>Disconnected</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="1" column="0">
+                <widget class="QLabel" name="label_state_title">
+                    <property name="text">
+                        <string>Trạng thái Máy:</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="1" column="1">
+                <widget class="QLabel" name="stateLabel">
+                    <property name="font">
+                        <font>
+                            <pointsize>16</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                        </font>
+                    </property>
+                    <property name="styleSheet">
+                        <string>color: #95a5a6;</string>
+                    </property>
+                    <property name="text">
+                        <string>Unknown</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="2" column="0">
+                <widget class="QLabel" name="label_x_title">
+                    <property name="font">
+                        <font>
+                            <pointsize>20</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>X:</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="2" column="1">
+                <widget class="QLabel" name="xPosLabel">
+                    <property name="font">
+                        <font>
+                            <family>Consolas</family>
+                            <pointsize>28</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                        </font>
+                    </property>
+                    <property name="styleSheet">
+                        <string>color: #3498db;</string>
+                    </property>
+                    <property name="text">
+                        <string>0.000</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="3" column="0">
+                <widget class="QLabel" name="label_y_title">
+                    <property name="font">
+                        <font>
+                            <pointsize>20</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Y:</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="3" column="1">
+                <widget class="QLabel" name="yPosLabel">
+                    <property name="font">
+                        <font>
+                            <family>Consolas</family>
+                            <pointsize>28</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                        </font>
+                    </property>
+                    <property name="styleSheet">
+                        <string>color: #2ecc71;</string>
+                    </property>
+                    <property name="text">
+                        <string>0.000</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="4" column="0">
+                <widget class="QLabel" name="label_z_title">
+                    <property name="font">
+                        <font>
+                            <pointsize>20</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Z:</string>
+                    </property>
+                </widget>
+            </item>
+            <item row="4" column="1">
+                <widget class="QLabel" name="zPosLabel">
+                    <property name="font">
+                        <font>
+                            <family>Consolas</family>
+                            <pointsize>28</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                        </font>
+                    </property>
+                    <property name="styleSheet">
+                        <string>color: #e74c3c;</string>
+                    </property>
+                    <property name="text">
+                        <string>0.000</string>
+                    </property>
+                </widget>
+            </item>
+        </layout>
+    </widget>
+</item>
+      
+      <item>
+       <widget class="QGroupBox" name="groupBox_jog">
+        <property name="title">
+         <string>ĐIỀU KHIỂN JOG</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_jog">
+         <item row="0" column="1">
+          <widget class="QPushButton" name="jogYPlusButton">
+           <property name="text">
+            <string>Y+ (Tiến)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="jogXMinusButton">
+           <property name="text">
+            <string>X- (Trái)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="jogXPlusButton">
+           <property name="text">
+            <string>X+ (Phải)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QPushButton" name="jogZPlusButton">
+           <property name="text">
+            <string>Z+</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="jogYMinusButton">
+           <property name="text">
+            <string>Y- (Lùi)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QPushButton" name="jogZMinusButton">
+           <property name="text">
+            <string>Z-</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      
+      <item>
+       <widget class="QGroupBox" name="groupBox_preset">
+        <property name="title">
+         <string>VỊ TRÍ PRESET (A, B, C, D)</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_preset">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="gotoAButton">
+           <property name="text">
+            <string>Go to A</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="gotoBButton">
+           <property name="text">
+            <string>Go to B</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="gotoCButton">
+           <property name="text">
+            <string>Go to C</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QPushButton" name="gotoDButton">
+           <property name="text">
+            <string>Go to D</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="setAButton">
+           <property name="text">
+            <string>Set A</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QPushButton" name="setBButton">
+           <property name="text">
+            <string>Set B</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="setCButton">
+           <property name="text">
+            <string>Set C</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QPushButton" name="setDButton">
+           <property name="text">
+            <string>Set D</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      
+      
+      <item>
+       <widget class="QGroupBox" name="groupBox_manual_goto">
+        <property name="title">
+         <string>GOTO VỊ TRÍ (Thủ công)</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_manual_goto">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_goto_X">
+           <property name="text">
+            <string>X</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_goto_Y">
+           <property name="text">
+            <string>Y</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_goto_Z">
+           <property name="text">
+            <string>Z</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         
+         <item row="1" column="0">
+          <widget class="QLineEdit" name="txt_input_goto_X">
+           <property name="placeholderText">
+            <string>X Value</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="txt_input_goto_Y">
+           <property name="placeholderText">
+            <string>Y Value</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLineEdit" name="txt_input_goto_Z">
+           <property name="placeholderText">
+            <string>Z Value</string>
+           </property>
+          </widget>
+         </item>
+         
+         <item row="1" column="3">
+          <widget class="QPushButton" name="btn_manual_goto">
+           <property name="text">
+            <string>Go!</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      
+      <item>
+       <widget class="QGroupBox" name="groupBox_manual_set">
+        <property name="title">
+         <string>Set VỊ TRÍ </string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_manual_set">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_set_X">
+           <property name="text">
+            <string>X</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_set_Y">
+           <property name="text">
+            <string>Y</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_set_Z">
+           <property name="text">
+            <string>Z</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         
+         <item row="1" column="0">
+          <widget class="QLineEdit" name="txt_input_set_X">
+           <property name="placeholderText">
+            <string>X Value</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="txt_input_set_Y">
+           <property name="placeholderText">
+            <string>Y Value</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLineEdit" name="txt_input_set_Z">
+           <property name="placeholderText">
+            <string>Z Value</string>
+           </property>
+          </widget>
+         </item>
+         
+         
+        </layout>
+       </widget>
+      </item>
+
+
+
+
+
+
+
+      
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_log">
+      
+      <item>
+       <widget class="QGroupBox" name="groupBox_gcode">
+        <property name="title">
+         <string>NHẬP LỆNH G-CODE</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_gcode">
+         <item>
+          <widget class="QLineEdit" name="gcodeInput">
+           <property name="placeholderText">
+            <string>Nhập lệnh G-code (ví dụ: G0 X10 Y10)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="sendButton">
+           <property name="text">
+            <string>Send</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      
+      <item>
+       <widget class="QGroupBox" name="groupBox_log">
+        <property name="title">
+         <string>LOG GIAO TIẾP (UART/COM)</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_log_text">
+         <item>
+          <widget class="QTextEdit" name="logTextEdit">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
